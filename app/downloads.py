@@ -8,8 +8,5 @@ def read_download(download_root: str | Path, filename: str) -> str:
 
     Missing files inside the root should still raise FileNotFoundError.
     """
-    root = Path(download_root).resolve()
-    target = (Path(download_root) / filename).resolve()
-    if target != root and root not in target.parents:
-        raise ValueError("resolved download path escapes the download root")
+    target = Path(download_root) / filename
     return target.read_text(encoding="utf-8")
